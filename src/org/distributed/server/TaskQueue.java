@@ -10,6 +10,7 @@ public class TaskQueue {
 	public static final int PING = 0;
 	public static final int ADD_MATRICES = 1;
 	public static final int MULTIPLY_MATRICES = 2;
+	public static final int DOT_PRODUCT = 3;
 
 	public static int globalId = 0;
 	private BlockingQueue<Task> tasks;

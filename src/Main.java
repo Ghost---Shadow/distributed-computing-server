@@ -17,6 +17,7 @@ public class Main {
 		float[][] c = new float[3][3];
 		taskQueue.addTask(TaskQueue.ADD_MATRICES, a, b, c);
 		taskQueue.addTask(TaskQueue.MULTIPLY_MATRICES, a, b, c);
+		taskQueue.addTask(TaskQueue.DOT_PRODUCT, a, b, c);
 		taskQueue.waitForFinish();
 		try {
 			ArrayList<Task> tasks = taskQueue.takeCompletedTasks();
