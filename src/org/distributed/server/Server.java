@@ -84,9 +84,10 @@ public class Server {
 				Task task = taskQueue.getNextTask();
 				objectOut.writeObject(task);
 				Task completedTask = (Task) objectIn.readObject();
-				taskQueue.removeTaskFromQueue(task);
-				taskQueue.addToCompletedTasks(completedTask);
-				completedTask.print();
+				if (completedTask.type != TaskQueue.PING) {
+					taskQueue.addToCompletedTasks(completedTask);
+					taskQueue.removeTaskFromQueue(task);
+				}
 			} catch (IOException e) {
 				e.printStackTrace();
 			} catch (ClassNotFoundException e) {

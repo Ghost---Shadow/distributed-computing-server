@@ -9,11 +9,12 @@ import org.distributed.serializable.Task;
 public class TaskQueue {
 	public static final int PING = 0;
 	public static final int ADD_MATRICES = 1;
+	public static final int MULTIPLY_MATRICES = 2;
 
 	public static int globalId = 0;
 	private BlockingQueue<Task> tasks;
 	private BlockingQueue<Task> completedTasks;
-	
+
 	public TaskQueue() {
 		tasks = new LinkedBlockingQueue<>();
 		completedTasks = new LinkedBlockingQueue<>();
@@ -33,10 +34,7 @@ public class TaskQueue {
 
 	public Task getNextTask() throws InterruptedException {
 		if (tasks.size() > 0) {
-			Task task = tasks.take();
-			tasks.remove(0);
-			tasks.add(task);
-			return task;
+			return tasks.peek();
 		} else {
 			return new Task(PING, -1, null, null, null);
 		}
@@ -45,16 +43,18 @@ public class TaskQueue {
 	public void removeTaskFromQueue(Task task) {
 		tasks.remove(task);
 	}
-	
-	public void addToCompletedTasks(Task task){
+
+	public void addToCompletedTasks(Task task) {
 		completedTasks.add(task);
+
+		System.out.println("Adding to completed tasks " + completedTasks.size());
 	}
-	
-	public ArrayList<Task> takeCompletedTasks() throws InterruptedException{
+
+	public ArrayList<Task> takeCompletedTasks() throws InterruptedException {
 		ArrayList<Task> temp = new ArrayList<>();
-		for(int i = 0; i < completedTasks.size(); i++){
+		while (completedTasks.size() > 0)
 			temp.add(completedTasks.take());
-		}
+
 		return temp;
 	}
 
