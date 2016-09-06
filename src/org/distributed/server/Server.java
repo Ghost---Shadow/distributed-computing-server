@@ -18,7 +18,7 @@ public class Server {
 
 	private static Server server;
 	private static TaskQueue taskQueue;
-	private static final int PORT = 5555;
+	public static int PORT = 80;
 
 	private Server() {
 		executorService = Executors.newFixedThreadPool(NUMBER_OF_CLIENTS);
