@@ -14,17 +14,21 @@ public class Task implements Serializable {
 		this.q = q;
 		this.r = r;
 	}
-	
-	public void print(){
+
+	public void print() {
+		System.out.println("Type: " + type + " Id: " + id);
 		//printMatrix(p);
 		//printMatrix(q);
 		printMatrix(r);
 	}
-	
-	private void printMatrix(float[][] x){
+
+	private void printMatrix(float[][] x) {
+		if (x == null)
+			return;
+
 		for (int i = 0; i < x.length; i++) {
 			for (int j = 0; j < x[i].length; j++) {
-				System.out.println(x[i][j] + " ");
+				System.out.print(x[i][j] + " ");
 			}
 			System.out.println();
 		}
