@@ -81,6 +81,7 @@ public class Server {
 				ObjectOutputStream objectOut = new ObjectOutputStream(socket.getOutputStream());
 				ObjectInputStream objectIn = new ObjectInputStream(socket.getInputStream());
 				System.out.println("Number of tasks: " + taskQueue.incompleteSize());
+				System.out.println(socket.getInetAddress().toString());
 				Task task = taskQueue.getNextTask();
 				objectOut.writeObject(task);
 				Task completedTask = (Task) objectIn.readObject();
